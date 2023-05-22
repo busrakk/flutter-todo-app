@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:todoapp/constants/colors.dart';
 import 'package:todoapp/model/todo.dart';
+import 'package:todoapp/widgets/todo_item.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -74,7 +75,28 @@ class _HomeScreenState extends State<HomeScreen> {
           Container(
             padding: const EdgeInsets.symmetric(
                 horizontal: 20, vertical: 15), // yataydan 20 boşluk
-            child: Column(children: [searchBox()]),
+            child: Column(children: [
+              searchBox(),
+              // Expanded: var olan tüm boşluğu kaplar. flex parametresine göre orantıya göre yükseklik alır
+              Expanded(
+                // listview: elemanların listelenmesini sağlar
+                child: ListView(children: [
+                  Container(
+                    margin: const EdgeInsets.only(top: 50, bottom: 20),
+                    child: const Text(
+                      "All Todos",
+                      style:
+                          TextStyle(fontSize: 30, fontWeight: FontWeight.bold),
+                    ),
+                  ),
+                  for (Todo todoo in _foundTodo)
+                    TodoItem(
+                        todo: todoo,
+                        onTodoChanged: _handleTodoChange,
+                        onDeleteItem: _deleteTodoItem)
+                ]),
+              )
+            ]),
           )
         ],
       ),
