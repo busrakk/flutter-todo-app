@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:todoapp/constants/colors.dart';
 import 'package:todoapp/model/todo.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -66,6 +67,32 @@ class _HomeScreenState extends State<HomeScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return Container();
+    return Scaffold(
+      appBar: _buildAppbar(),
+    );
+  }
+
+  AppBar _buildAppbar() {
+    return AppBar(
+      backgroundColor: tdBGColor,
+      elevation: 0, // z-index
+      title: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          const Icon(
+            Icons.menu,
+            color: tdBlack,
+            size: 30,
+          ),
+          SizedBox(
+            width: 40,
+            height: 40,
+            child: ClipRRect(
+                borderRadius: BorderRadius.circular(20),
+                child: Image.asset("assets/images/avatar.jpg")),
+          )
+        ],
+      ),
+    );
   }
 }
