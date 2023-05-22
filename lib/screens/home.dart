@@ -69,7 +69,38 @@ class _HomeScreenState extends State<HomeScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: _buildAppbar(),
+      body: Stack(
+        children: [
+          Container(
+            padding: const EdgeInsets.symmetric(
+                horizontal: 20, vertical: 15), // yataydan 20 boşluk
+            child: Column(children: [searchBox()]),
+          )
+        ],
+      ),
     );
+  }
+
+  Widget searchBox() {
+    return Container(
+        decoration: BoxDecoration(
+            color: Colors.white, borderRadius: BorderRadius.circular(20)),
+        child: TextField(
+          onChanged: (value) => _runFilter(value),
+          decoration: const InputDecoration(
+              contentPadding: EdgeInsets.zero,
+              prefixIcon: Icon(
+                // sol tarafa icon ekler
+                Icons.search,
+                color: tdBlack,
+                size: 20,
+              ),
+              prefixIconConstraints:
+                  BoxConstraints(maxHeight: 20, minWidth: 25),
+              border: InputBorder.none, // alttaki çizgi gözükmesin
+              hintText: "Search ",
+              hintStyle: TextStyle(color: tdGrey)),
+        ));
   }
 
   AppBar _buildAppbar() {
